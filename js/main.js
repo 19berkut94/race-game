@@ -13,7 +13,7 @@ const BLOCK_SIZE = 20;   // размер одной клетки поля в п�
 const GAME_HEIGHT_IN_BLOCKS = GAME_HEIGHT / BLOCK_SIZE - 1; // ширина поля в клетках
 const GAME_WIDTH_IN_BLOCKS = GAME_WIDTH / BLOCK_SIZE - 1;   // высота поля в клетках
 
-const TIME_INTERVAL = 400 // интервал времени перерисовки игрового экрана в милисекундах
+const TIME_INTERVAL = 100 // интервал времени перерисовки игрового экрана в милисекундах
 
 const COLOR_BACKGROUND = "#c5f0a7";
 const COLOR_SNAKE = "#000000";
@@ -40,17 +40,18 @@ function gameInitialization() {
         BOT.gatherCarFromParts()  
         BOT.itemParts.forEach(part => {
             part.x += GAME.botBases[i]  
+            part.y -= (i * BOT.heightInSquares * BOT.heightInSquares)
         })
          
         GAME.BOTS.push(BOT)  
              
     }
-    console.log(GAME);
+   
 }
 
 gameInitialization()
 
-//gameLoop();
+gameLoop();
 
 
 function gameLoop() {
@@ -61,7 +62,7 @@ function gameLoop() {
             HELPERS.drawCarSegment(part.x, part.y) 
         })
         bot.move(GAME_HEIGHT_IN_BLOCKS)
-        bot.reborn(GAME_HEIGHT_IN_BLOCKS)
+        bot.reborn(GAME_HEIGHT_IN_BLOCKS, GAME.BOTS, GAME.botBases)
     })
   
  

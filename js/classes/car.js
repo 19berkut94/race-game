@@ -34,11 +34,20 @@ export default class Car extends GameItem {
         }
     }
 
-    reborn(fieldHeight) {
+    reborn(fieldHeight, arrayOfAllBots, arrayOfBases) {
         if(this.itemParts[0].y > fieldHeight) {
-         this.itemParts.forEach(part => {
-             part.y -= (fieldHeight + this.heightInSquares)
-         })
+            let randomBaseX = arrayOfBases[Math.floor(Math.random() * arrayOfBases.length)]
+            let delta = this.itemParts[0].x - randomBaseX
+            for(let i = 0; i < this.itemParts.length; i++) {
+                this.itemParts[i].y -= (fieldHeight + this.heightInSquares)
+           
+                
+                
+               // this.itemParts[i].x += delta
+
+               //console.log(randomBaseX);
+            }
+      
         }
     }
 }
